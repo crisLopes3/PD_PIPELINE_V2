@@ -38,7 +38,7 @@ node{
     stage('PUSH image to Docker Hub')
     {            
              sh 'sudo docker login -u "a21250034cris" -p "940d2f22-b124-468a-a978-1b8257de181c" docker.io'
-             sh 'sudo docker push raquelbatista/my-app:1.0' 
+             sh 'sudo docker push a21250034cris/my-app:2.0' 
     }
     
     
