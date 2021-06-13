@@ -19,7 +19,7 @@ node{
    
    stage('docker build/push') {            
      docker.withRegistry('https://index.docker.io/v1/', 'dockerhub') {
-       def app = docker.build("a21250034cris/my-app:2.0", '.').push()
+       def app2 = docker.build("a21250034cris/my-app:2.0", '.').push()
      }                                     
    }   
      
