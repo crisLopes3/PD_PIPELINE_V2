@@ -21,18 +21,6 @@ pipeline {
                 }
             }
         }
-        
-        stage('SCM Checkout')
-    {
-        git url: 'https://github.com/crisLopes3/PD_PIPELINE_V2.git'
-    }
-    
-    
-    stage('Run Docker Compose File')
-    {
-        sh 'sudo docker-compose build'
-        sh 'sudo docker-compose up -d'
-    }
         stage("test") {
             when {
                 expression {
