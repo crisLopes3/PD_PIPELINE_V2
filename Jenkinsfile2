@@ -16,15 +16,15 @@ node{
         echo 'BUILD successed...'
     }
     
+     /*
     stage('Test image') {
         
         app.inside {
             echo "Tests passed"
         }
     }
+    */
     
-    
-     /*
     stage('Push image') {
 
         docker.withRegistry('https://registry.hub.docker.com', 'docker-hub') {
@@ -33,10 +33,5 @@ node{
             } 
                 echo "Trying to Push Docker Build to DockerHub"
     }
-    
-   
-    
-    */
-    
   
 }
