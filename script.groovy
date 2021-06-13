@@ -1,6 +1,6 @@
 def buildApp() {
     echo 'building the application...'
-    #git url: 'https://github.com/crisLopes3/PD_PIPELINE_V2.git'
+
 } 
 
 def testApp() {
