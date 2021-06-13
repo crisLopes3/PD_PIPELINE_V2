@@ -16,16 +16,20 @@ node{
         echo 'BUILD successed...'
     }
     
-     /*
-    stage('Test image') {
-        
-        app.inside {
+     stage('Test image') {
+     
+        def myTestContainer = docker.image('my-app:2.0')
+        myTestContainer.pull()   
+        myTestContainer.inside {
             echo "Tests passed"
         }
     }
-  
+     
+    
+     /*
    
-    stage('Push image') {
+  
+   stage('Push image to Docker Hub') {
 
         docker.withRegistry('https://registry.hub.docker.com', 'docker-hub') {
             app.push("${env.BUILD_NUMBER}")
@@ -33,14 +37,15 @@ node{
             } 
                 echo "Trying to Push Docker Build to DockerHub"
     }
-      */
+   
+    
     
     stage('PUSH image to Docker Hub')
     {            
              sh 'sudo docker login -u "a21250034cris" -p "940d2f22-b124-468a-a978-1b8257de181c" docker.io'
              sh 'sudo docker push a21250034cris/my-app:2.0' 
     }
-    
+      */
     
   
 }
