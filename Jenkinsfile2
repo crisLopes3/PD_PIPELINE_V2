@@ -1,8 +1,8 @@
 node{
     stage('SCM Checkout')
-    {
-        sh 'cd /'
-        sh 'sudo git clone https://github.com/crisLopes3/PD_TESTE.git'
+    {       
+        git branch: 'main',
+           url: 'https://github.com/crisLopes3/PD_PIPELINE_V2.git'
     }
     
     
