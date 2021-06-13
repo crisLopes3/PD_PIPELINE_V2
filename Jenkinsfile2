@@ -3,8 +3,9 @@ node{
     {       
         
         echo 'cloning the application...'
-        git branch: 'main',
-           url: 'https://github.com/crisLopes3/PD_PIPELINE_V2.git'
+
+           
+        checkout scm
         echo 'cloning successed...'
     }
     
