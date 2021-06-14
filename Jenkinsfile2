@@ -17,6 +17,15 @@ node{
         echo 'BUILD successed...'
     }
     
+    stage('build123') {
+      cmd_exec('echo "Hello World"')
+
+}
+
+def cmd_exec(command) {
+    return bat(returnStdout: true, script: "${command}").trim()
+}
+    
     stage('Run Docker Compose File')
     {
         sh 'echo "Hello World"'
