@@ -9,10 +9,6 @@ WORKDIR /app
 
 COPY . /app
 
-
-RUN aptitude -y install docker-compose
-RUN ln -s /usr/local/bin/docker-compose /compose/docker-compose
-
 RUN npm install
 
 
