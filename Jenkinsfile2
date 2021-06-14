@@ -1,6 +1,11 @@
 node{
 
     def app
+    
+    environment{
+        registry = ''
+        registryCredential = 'a21250034cris'
+    }
 
     stage('SCM Checkout')
     {            
@@ -16,13 +21,17 @@ node{
         echo 'BUILD successed...'
     }
     
+    
+    stage('Push image to Docker Hub') {
+
+       docker.withRegistry('', registryCredential) {
+                def app2 = docker.build("a21250034cris/my-app:2.0", '.').push()
+        }   
+        echo "Trying to Push Docker Build to DockerHub"
+    }
+  
    
-   stage('docker build/push') {            
-     docker.withRegistry('https://index.docker.io/v1/', 'dockerhub') {
-       def app2 = docker.build("a21250034cris/my-app:2.0", '.').push()
-     }                                     
-   }   
-     
+ 
     
      /*
      
@@ -36,7 +45,13 @@ node{
         }
     }
    
-  
+     stage('docker build/push') {            
+     docker.withRegistry('https://index.docker.io/v1/', 'dockerhub') {
+       def app2 = docker.build("a21250034cris/my-app:2.0", '.').push()
+     }                                     
+   }   
+     
+    
    stage('Push image to Docker Hub') {
 
         docker.withRegistry('https://registry.hub.docker.com', 'docker-hub') {
