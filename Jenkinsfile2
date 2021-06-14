@@ -17,13 +17,13 @@ node{
         echo 'BUILD successed...'
     }
     
-  stage('Push image  to Docker Hub') {
-    docker.withRegistry('https://registry.hub.docker.com', 'git') {            
-        def app2 = docker.build("a21250034cris/my-app:2.0", '.').push()
-        echo "Trying to Push Docker Build to DockerHub"   
-              }    
-           }
-        }
+    stage('Push image  to Docker Hub') {
+        docker.withRegistry('https://registry.hub.docker.com', 'git') {            
+            def app2 = docker.build("a21250034cris/my-app:2.0", '.').push()
+            echo "Trying to Push Docker Build to DockerHub"   
+          }    
+       }
+        
    
  
     
