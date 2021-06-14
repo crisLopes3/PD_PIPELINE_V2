@@ -1,26 +1,44 @@
-node{
+def gv
 
-    def app
-   
-
-    stage('SCM Checkout')
-    {            
-        echo 'cloning the application...'    
-        checkout scm
-        echo 'cloning successed...'
+pipeline  {
+    agent any
+    parameters {
+        choice(name: 'VERSION', choices: ['1.1.0', '1.2.0', '1.3.0'], description: '')
+        booleanParam(name: 'executeTests', defaultValue: true, description: '')
     }
-    
-    stage('Build image') {
-        echo 'BUILDIND successed...'
-        app = docker.build("a21250034cris/my-app:3.0")
-        
-        echo 'BUILD successed...'
-    }
-    
-    stage('Push image  to Docker Hub') {
-        docker.withRegistry('https://index.docker.io/v1/', 'dockerhub') {            
-            def app2 = docker.build("a21250034cris/my-app:3.0", '.').push()
-            echo "Trying to Push Docker Build to DockerHub"   
-          }    
-       }  
+    stages {
+        stage("init") {
+            steps {
+                script {
+                   gv = load "script.groovy" 
+                }
+            }
+        }
+        stage("build") {
+            steps {
+                script {
+                    gv.buildApp()
+                }
+            }
+        }
+        stage("test") {
+            when {
+                expression {
+                    params.executeTests
+                }
+            }
+            steps {
+                script {
+                    gv.testApp()
+                }
+            }
+        }
+        stage("deploy") {
+            steps {
+                script {
+                    gv.deployApp()
+                }
+            }
+        }
+    }   
 }
