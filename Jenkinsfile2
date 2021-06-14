@@ -1,15 +1,7 @@
 node{
 
     def app
-    
-    def shell(command) {
-    return bat(returnStdout: true, script: "sh -x -c \"${command}\"").trim()
-}
-    
-    environment{
-        registry = ''
-        registryCredential = 'a21250034cris'
-    }
+   
 
     stage('SCM Checkout')
     {            
@@ -27,7 +19,8 @@ node{
     
     stage('Run Docker Compose File')
     {
-        sh 'chown -R 1000 .' 
+        sh 'echo "Hello World"'
+        //sh 'chown -R 1000 .' 
         sh 'docker-compose build'
         sh 'docker-compose up -d'
     }
