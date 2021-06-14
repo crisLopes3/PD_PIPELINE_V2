@@ -24,9 +24,9 @@ node{
     
     stage('Push image to Docker Hub') {
 
-       docker.withRegistry('', 'a21250034cris') {
-                def app2 = docker.build("a21250034cris/my-app:2.0", '.').push()
-        }   
+      
+      def app2 = docker.build("a21250034cris/my-app:2.0", '.').push()
+          
         echo "Trying to Push Docker Build to DockerHub"
     }
   
