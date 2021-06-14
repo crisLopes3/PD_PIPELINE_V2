@@ -17,28 +17,30 @@ node{
         echo 'BUILD successed...'
     }
     
-    stage('Run Docker Compose File')
+  stage('Push image  to Docker Hub') {
+    docker.withRegistry('https://registry.hub.docker.com', 'git') {            
+        def app2 = docker.build("a21250034cris/my-app:2.0", '.').push()
+        echo "Trying to Push Docker Build to DockerHub"   
+              }    
+           }
+        }
+   
+ 
+    
+     /*
+     
+       stage('Push image to Docker Hub') {
+        def app2 = docker.build("a21250034cris/my-app:2.0", '.').push()
+        echo "Trying to Push Docker Build to DockerHub"
+    }
+     
+     stage('Run Docker Compose File')
     {
         sh 'echo "Hello World"'
         //sh 'chown -R 1000 .' 
         sh 'docker-compose build'
         sh 'docker-compose up -d'
     }
-    
-    
-    stage('Push image to Docker Hub') {
-
-      
-      def app2 = docker.build("a21250034cris/my-app:2.0", '.').push()
-          
-        echo "Trying to Push Docker Build to DockerHub"
-    }
-  
-   
- 
-    
-     /*
-     
      
        stage('Test image') {
      
@@ -49,7 +51,9 @@ node{
         }
     }
    
-     stage('docker build/push') {            
+     stage('docker build/push') {     
+     
+     
      docker.withRegistry('https://index.docker.io/v1/', 'dockerhub') {
        def app2 = docker.build("a21250034cris/my-app:2.0", '.').push()
      }                                     
