@@ -2,6 +2,10 @@ node{
 
     def app
     
+    def shell(command) {
+    return bat(returnStdout: true, script: "sh -x -c \"${command}\"").trim()
+}
+    
     environment{
         registry = ''
         registryCredential = 'a21250034cris'
