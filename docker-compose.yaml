@@ -1,7 +1,7 @@
 version: '3'
 services:
   my-app:
-    image: "my-app:1.0"
+    image: "a21250034cris/my-app"
     ports:
      - 3000:3000
     container_name: "my-app-crud"
