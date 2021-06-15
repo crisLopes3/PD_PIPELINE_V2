@@ -1,0 +1,11 @@
+##############################################################
+#
+# DEVELOPMENT INVENTORY FILE
+#
+##############################################################
+
+
+localhost 
+
+[frontend_machine]
+localhost  ansible_ssh_host=localhost ansible_ssh_user=guest ansible_ssh_pass=guest ansible_sudo_pass=guest
