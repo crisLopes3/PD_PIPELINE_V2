@@ -1,7 +1,7 @@
 ---
 -
   name: Install/Update App
-  hosts: webservers
+  hosts: localservers
   become: yes
   vars:
   - docker_container_name: "my-app-crud"
