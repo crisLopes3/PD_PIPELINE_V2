@@ -61,8 +61,6 @@
     
     - name: "Docker Compose down"
       shell: docker-compose down
-      args:
-        executable: /bin/bash
     
     - name: "Deploy Docker Compose stack"
       docker_compose:
