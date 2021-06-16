@@ -6,9 +6,12 @@
   become: yes
   vars:
   - docker_compose_version: "1.25.0"
+  - my_app_version: "{{ version }}"
   tasks:
     - debug: 
         msg: "Hello Docker"
+    - debug: 
+        msg: {{my_app_version}}
 
     - name: Install aptitude using apt
       apt: name=aptitude state=latest update_cache=yes force_apt_get=yes
