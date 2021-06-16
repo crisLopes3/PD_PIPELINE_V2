@@ -1,0 +1,3 @@
+[server_app]
+localhost ansible_host=localhost ansible_user=ansadmin ansible_ssh_private_key_file=/home/ansadmin/ansible-CN ansible_python_interpreter=/usr/bin/python3
+ansible_CN ansible_connection=local
