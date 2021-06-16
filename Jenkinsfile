@@ -1,7 +1,11 @@
 node{
 
     def app
-   
+    
+     parameters {
+        choice(name: 'VERSION', choices: ['3.0',  '2.0'], description: '')
+        booleanParam(name: 'executePlaybook', defaultValue: false, description: '')
+    }
 
     stage('SCM Checkout')
     {            
