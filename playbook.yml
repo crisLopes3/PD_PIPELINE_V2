@@ -8,9 +8,7 @@
   - docker_compose_version: "1.25.0"
   tasks:
     - debug: 
-        msg: "Hello Docker"
-    - debug: 
-        msg: "{{my_app_version}}"
+        msg: "App Version: {{my_app_version}}"
 
     - name: Install aptitude using apt
       apt: name=aptitude state=latest update_cache=yes force_apt_get=yes
@@ -61,8 +59,8 @@
     
     - name: "Pull docker image from DockerHub"
       docker_image:
-         name: "a21250034cris/my-app:3.0"
-         tag: "3.0"
+         name: "a21250034cris/my-app:{{my_app_version}}"
+         tag: "{{my_app_version}}"
          state: present
          source: pull
     
