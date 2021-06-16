@@ -1,8 +1,10 @@
-node{
+def app
 
-    def app
+pipeline {
+
+    agent any
     
-     parameters {
+    parameters {
         choice(name: 'VERSION', choices: ['3.0',  '2.0'], description: '')
         booleanParam(name: 'executePlaybook', defaultValue: false, description: '')
     }
@@ -30,6 +32,11 @@ node{
        }  
     
     stage('Run Ansible Playbook') {
+        when {
+                expression {
+                    params.executePlaybook
+                }
+            }
          ansiblePlaybook credentialsId: 'ansible-CN', disableHostKeyChecking: true, installation: 'ansible2', inventory: 'hosts.inventory', playbook: 'playbook.yml'
        }  
 }
