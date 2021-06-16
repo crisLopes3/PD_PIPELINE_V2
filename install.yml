@@ -1,12 +1,9 @@
 ---
 -
   name: Install/Update App
-  hosts: frontend_machine
+  hosts: docker_group
   become: yes
   vars:
-  - docker_container_name: "my-app-crud"
-  - docker_mongo_container_name: "my-mongodb"
-  - docker_mongo_image_name: "mongo"
   - docker_compose_version: "1.25.0"
   tasks:
     - debug: 
@@ -24,12 +21,7 @@
       register: is_docker_compose_install
       ignore_errors: yes
 
-    - debug: msg="{{is_docker_compose_install}}"
-
-    #- name: "Install required system packages"
-    #  apt: name={{ item }} state=latest update_cache=yes
-    #  loop: [ 'python3-pip', 'python3-setuptools']
-
+  
     - name: "Add Docker Repository"
       apt_repository:
        repo: deb https://download.docker.com/linux/ubuntu bionic stable
@@ -51,7 +43,6 @@
         state: started
         enabled: true
 
-
     - name: "Install docker-compose if necessary"
       get_url:
         url: "https://github.com/docker/compose/releases/download/{{ docker_compose_version }}/docker-compose-Linux-x86_64"
@@ -59,45 +50,15 @@
         mode: 'a+x'
         force: yes
       when: is_docker_compose_install.rc != 0
-
-    - name: "Check if already has mongo image"
-      docker_image:
-         name: "{{docker_mongo_image_name}}"
-         tag: "latest"
-         state: present
-         source: pull
-
-    - name: "Create mongo container if necessary"
-      docker_container:
-         name: "{{docker_mongo_container_name}}"
-         image: "{{docker_mongo_image_name}}"
-         ports:
-          - "0.0.0.0:27017:27017"
-         state: started
-
-    #- name: "Stop and Remove all myapp containers"
-    #  docker_container:
-    #     name: "{{docker_container_name}}"
-    #     state: absent
-
-    - name: "Remove myapp Image"
-      shell: "docker rmi a21250034cris/my-app:3.0"
-      #ignore_errors: yes
       
+
     - name: "Pull docker image from DockerHub"
       docker_image:
          name: "a21250034cris/my-app:3.0"
          tag: "3.0"
          state: present
          source: pull
-         
-    - name: "Launch docker container"
-      docker_container:
-         name: "{{docker_container_name}}"
-         image: "a21250034cris/my-app:3.0"
-         ports:
-          - "127.0.0.1:8081:8081"
-         links:
-          - "my-mongodb:db"
-         state: started
-      register: docker_info
+    
+    - name: "Deploy Docker Compose stack"
+      docker_compose:
+        project_src: .
