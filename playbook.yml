@@ -52,6 +52,13 @@
         force: yes
       when: is_docker_compose_install.rc != 0
     
+    - name: "Pull docker image from DockerHub"
+      docker_image:
+         name: "a21250034cris/my-app:3.0"
+         tag: "3.0"
+         state: present
+         source: pull
+    
     - name: "Docker Compose down"
       shell: sudo docker-compose down
     
