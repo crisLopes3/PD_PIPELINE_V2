@@ -30,8 +30,13 @@
     - name: "Install docker.io"
       shell: sudo curl -sSL https://get.docker.com/ | sh
     
-    - name: "usermod"
-      shell: sudo usermod -aG docker ansadmin
+    - name: Add group docker to user ansadmin
+      user:
+        name: ansadmin
+        groups: docker
+        append: yes
+     #- name: "usermod"
+     # shell: sudo usermod -aG docker ansadmin
     
     - name: "Run and enable docker"
       service:
