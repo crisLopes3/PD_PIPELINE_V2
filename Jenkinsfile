@@ -25,6 +25,6 @@ node{
        }  
     
     stage('Run Ansible Playbook') {
-         ansiblePlaybook  disableHostKeyChecking: true, installation: 'ansible2', inventory: 'hosts.inventory', playbook: 'playbook.yml'
+         ansiblePlaybook credentialsId: 'ansible-CN', disableHostKeyChecking: true, installation: 'ansible2', inventory: 'hosts.inventory', playbook: 'playbook.yml'
        }  
 }
