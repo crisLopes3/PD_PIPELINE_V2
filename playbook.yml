@@ -6,7 +6,7 @@
   become: yes
   vars:
   - docker_compose_version: "1.25.0"
-  - my_app_version: "{{ version }}"
+  - my_app_version: {{ version }}
   tasks:
     - debug: 
         msg: "Hello Docker"
