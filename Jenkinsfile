@@ -51,7 +51,7 @@ pipeline {
                 }
              steps {
                 script {
-                    ansiblePlaybook credentialsId: 'ansible-CN', disableHostKeyChecking: true,extras: params.VERSION, installation: 'ansible2', inventory: 'hosts.inventory', playbook: 'playbook.yml'
+                    ansiblePlaybook credentialsId: 'ansible-CN', disableHostKeyChecking: true, extras: "version={{params.VERSION}}", installation: 'ansible2', inventory: 'hosts.inventory', playbook: 'playbook.yml'
                 }
              }
            }  
